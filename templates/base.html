@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ site.get('store_name','HUSTLE NATION') }} | Official Store</title>
+<link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+</head><body data-theme="{{ site.get('theme','red') }}">
+<div class="loader" id="loader"><div class="loader-inner">
+{% if site.get('loader_logo') %}<img src="{{ url_for('static',filename='uploads/'+site.get('loader_logo')) }}" alt="Hustle Nation">{% else %}<div class="loader-word">HUSTLE<br>NATION</div>{% endif %}
+<div class="loader-line"><span></span></div><small>THE HUSTLE NEVER STOPS</small>
+</div></div>
+{% if site.get('launch_notice') %}<div class="launch-bar">{{ site.get('launch_notice') }}</div>{% endif %}
+<header class="site-header"><a class="brand" href="{{ url_for('home') }}">{% if site.get('logo') %}<img src="{{ url_for('static',filename='uploads/'+site.get('logo')) }}">{% else %}<span>HUSTLE<span class="red">NATION</span></span>{% endif %}</a>
+<nav><a href="{{ url_for('home') }}">Shop</a><a href="{{ url_for('about') }}">About Us</a><a href="{{ url_for('gallery') }}">Gallery</a><a href="{{ url_for('terms') }}">Terms</a></nav>
+<div class="header-actions"><a href="{{ url_for('cart') }}">Bag ({{ cart_count }})</a>{% if logged_customer %}<span class="welcome">Hi, {{ logged_customer }}</span><a href="{{ url_for('logout') }}">Logout</a>{% else %}<a href="{{ url_for('login') }}">Login</a>{% endif %}<a class="creator-link" href="{{ url_for('creator_login') }}">Creator</a></div>
+</header>
+{% with messages=get_flashed_messages(with_categories=true) %}{% if messages %}<div class="flash-wrap">{% for category,message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}</div>{% endif %}{% endwith %}
+<main>{% block content %}{% endblock %}</main>
+<footer><div class="footer-brand">HUSTLE NATION</div><p>Built for the ones who keep going.</p><div class="footer-links"><a href="{{ url_for('about') }}">About</a><a href="{{ url_for('terms') }}">Terms & Conditions</a><a href="{{ url_for('gallery') }}">Gallery</a><a href="https://wa.me/{{ site.get('whatsapp','27698881104') }}">WhatsApp</a></div><small>Developed by Otsile Graphics © 2024</small></footer>
+<div class="chat-widget"><button id="chat-toggle" aria-label="Open chat">CHAT WITH US</button><div class="chat-panel" id="chat-panel"><div class="chat-head">Hustle Nation Helper <button id="chat-close">×</button></div><div class="chat-messages" id="chat-messages"><p class="bot">Hi! Ask me about products, prices, orders or sizes.</p></div><form id="chat-form"><input id="chat-input" placeholder="Type your question..." required><button>Send</button></form></div></div>
+<script src="{{ url_for('static',filename='js/store.js') }}"></script></body></html>
